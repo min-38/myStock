@@ -26,7 +26,7 @@ class RegisterRequest extends FormRequest
             'age' => 'required|integer|min:19',
             'country' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,id',
-            'phone' => 'required|regex:/^0\d{1,2}(-|\))\d{3,4}-\d{4}$/|min:11|unique:users,phone',
+            'phone' => 'required|regex:/^01([016789]?)-?([0-9]{3,4})-?([0-9]{4})$/|min:11|unique:users,phone',
             'password' => 'required|regex:/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/|min:8',
             'password_confirmation' => 'required|same:password'
         ];
@@ -51,7 +51,7 @@ class RegisterRequest extends FormRequest
             'email.required' => '이메일을 입력해주세요.',
             'email' => '이메일 형식이 아닙니다',
             'password.required' => '패스워드를 입력해주세요.',
-            'password.min' => '8~16자의 이상의 영문, 숫자, 특수문자를 포함해야 합니다.',
+            'password' => '8~16자의 이상의 영문, 숫자, 특수문자를 포함해야 합니다.',
             'password_confirmation.required' => '패스워드를 입력해주세요.',
             'password.same' => '패스워드가 서로 일치하지 않습니다.'
         ];
