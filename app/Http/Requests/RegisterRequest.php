@@ -25,7 +25,7 @@ class RegisterRequest extends FormRequest
             'username' => 'required|unique:users,name|between:2,10',
             'age' => 'required|integer|min:19',
             'country' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users,id',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'phone' => 'required|regex:/^01([016789]?)-?([0-9]{3,4})-?([0-9]{4})$/|min:11|unique:users,phone',
             'password' => 'required|regex:/^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/|min:8',
             'password_confirmation' => 'required|same:password'

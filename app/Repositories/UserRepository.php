@@ -18,6 +18,15 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function addUser(RegisterRequest $user)
     {
-        return $model->create($user);
+        $userData = array(
+            'name' => $user->input('username'),
+            'email' => $user->input('email'),
+            'age' => $user->input('age'),
+            'country' => $user->input('country'),
+            'phone' => $user->input('phone'),
+            'password' => $user->input('password')
+        );
+        
+        return $this->create($userData);
     }
 }
