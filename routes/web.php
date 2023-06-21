@@ -17,10 +17,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('Pages/auth/login');
-});
+Route::group(['namespace' => 'App\Http\Controllers'], function()
+{   
+    Route::group(['middleware' => ['guest']], function() {
+        /**
+         * Register Routes
+         */
+        Route::get('/signup', function() {
+            return view('Pages/auth/signup');
+        })->name('auth.signup');
+        
+        Route::post('/signup', 'AuthController@create');
 
-Route::get('/signup', function () {
-    return view('Pages/auth/signup');
+        /**
+         * Login Routes
+         */
+        Route::get('/login', function () {
+            return view('Pages/auth/login');
+        })->name('auth.login');
+        Route::post('/login', 'LoginController@login');
+    });
 });

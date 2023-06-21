@@ -1,15 +1,14 @@
 body {
     background: #583672;
 }
+
 .auth_section {
-    height: 62.5rem;
     width: 100%;
-    position: relative;
 }
 
 .login_box {
     width: 1050px;
-    height: 600px;
+    min-height: 600px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -53,7 +52,6 @@ h3{
 input {
     border: none;
     width: 80%;
-    margin: 15px 0px;
     border-bottom: 1px solid #4f30677d;
     padding: 7px 9px;
     width: 100%;
@@ -61,6 +59,11 @@ input {
     background: transparent;
     font-weight: 600;
     font-size: 14px;
+}
+
+.inputDiv {
+    height: 5rem;
+    padding: 1.5rem 0px;
 }
 
 select {
@@ -146,4 +149,13 @@ select {
     width: 28px;
     padding-right: 7px;
     margin-top: -3px;
+}
+
+.invalid-feedback {
+    color: #ff0000;
+    display: none;
+}
+
+.invalid-feedback.active {
+    display: block;
 }
