@@ -268,11 +268,11 @@
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="phoneDiv" class="inputDiv">
-                  <input type="tel" class="signinData" name="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="PHONE" value="+82">
+                  <input type="tel" class="signinData" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="PHONE">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="passwordDiv" class="inputDiv">
-                  <input type="password" class="signinData" name="password" placeholder="PASSWORD">
+                  <input type="password" class="signinData" name="password" placeholder="PASSWORD(8~16자의 이상의 영문, 숫자, 특수문자) ">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="password_confirmationDiv" class="inputDiv">

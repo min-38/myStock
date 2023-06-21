@@ -52,7 +52,15 @@ function doSignup()
 }
 
 function setErrorMsg(json) {
-    let setCursor = false;
+    
+    let setCursor = false; // 유효성 검사 에러난 input 중 첫번째 input을 focus
+
+    // 유효성 검사 오류 텍스트 초기화
+    const allFeedback = document.querySelectorAll(".invalid-feedback"); 
+    allFeedback.forEach((ob)=>{
+        ob.classList.remove("active");
+    })
+
     Object.keys(json.errors).forEach(function(key){
         const inputDiv = document.getElementById(key + "Div");
         const feedback = inputDiv.getElementsByClassName("invalid-feedback")[0];
