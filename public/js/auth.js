@@ -29,6 +29,7 @@ function doSignup()
     xhr.open('POST', '/signup', true); // 요청을 보낼 방식, url, 비동기여부 설정
     xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').content);
     xhr.setRequestHeader('Accept', 'application/json'); 
+    xhr.responseType = 'json';
     // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhr.send(formData);
 
@@ -36,17 +37,15 @@ function doSignup()
     xhr.onload = () => {
         if (xhr.status == 200) {
             //success
-            // console.log(xhr.response);
-            
+            if(xhr.response.success) {
+                alert(xhr.response.msg);
+                window.location.href = xhr.response.redirectUrl;
+            }
         } else if (xhr.status == 422) {
-            const response = xhr.response;
-            const jsonData = JSON.parse(response);
-
-            setErrorMsg(jsonData);
-            
+            setErrorMsg(xhr.response);
         } else {
             //failed
-            console.log("3");
+            alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
         }
     }
 }

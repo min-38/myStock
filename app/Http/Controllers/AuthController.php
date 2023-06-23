@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Interfaces\UserRepositoryInterface;
-use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 
 class AuthController extends Controller
@@ -24,6 +23,15 @@ class AuthController extends Controller
     public function create(RegisterRequest $request)
     {
         $user = $this->userRepositoryInterface->addUser($request);
+        if($user) {
+
+            // 회원가입 성공 시
+            return response()->json(array(
+                'success' => true,
+                'msg'   => "회원가입이 되셨습니다. 로그인해주세요.",
+                'redirectUrl'   => "/login",
+            ));
+        }
         
 
 
