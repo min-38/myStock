@@ -35,6 +35,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/login', function () {
             return view('Pages/auth/login');
         })->name('auth.login');
-        Route::post('/login', 'LoginController@login');
+        Route::post('/login', 'AuthController@login');
     });
 });

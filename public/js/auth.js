@@ -17,6 +17,42 @@ window.onload = function(){
                 break;
         }
     });
+
+    document.querySelector(".btn.signup").addEventListener("click", function() {
+        location.href="/signup";
+    });
+}
+
+function doLogin() {
+    const formData = new FormData(document.getElementById("loginForm"));
+
+    // AJAX
+    const xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/login', true); // 요청을 보낼 방식, url, 비동기여부 설정
+    xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').content);
+    xhr.setRequestHeader('Accept', 'application/json'); 
+    xhr.responseType = 'json';
+    
+    xhr.send(formData);
+
+    //Callback
+    xhr.onload = () => {
+        if (xhr.status == 200) {
+            //success
+            if(xhr.response.success) {
+                // alert(xhr.response.msg);
+                window.location.href = xhr.response.redirectUrl;
+            } else {
+                
+            }
+        } else if (xhr.status == 422) {
+            console.log(xhr.response);
+        } else {
+            //failed
+            alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
+        }
+    }
 }
 
 function doSignup()
@@ -51,7 +87,6 @@ function doSignup()
 }
 
 function setErrorMsg(json) {
-    
     let setCursor = false; // 유효성 검사 에러난 input 중 첫번째 input을 focus
 
     // 유효성 검사 오류 텍스트 초기화

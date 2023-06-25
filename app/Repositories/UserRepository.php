@@ -2,6 +2,9 @@
 
 namespace App\Repositories;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+
 use App\Repositories\BaseRepository;
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
@@ -9,11 +12,20 @@ use App\Http\Requests\RegisterRequest;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
-    protected $model;
-
     public function __construct(User $model)
     {
         parent::__construct($model);
+    }
+
+    public function findUser(Request $request)
+    {
+        $existUser = User::where('email', $request->input('email'))->first("*");
+        if($existUser) {
+            if(Hash::check($request->input('password'), $existUser->password)) {
+                return $existUser;
+            }
+        }
+        return false;
     }
 
     public function addUser(RegisterRequest $user)

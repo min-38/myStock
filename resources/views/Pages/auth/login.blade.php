@@ -3,12 +3,12 @@
    <div class="login_box">
       <div class="left">
          <div class="contact">
-            <form id="">
+            <form id="loginForm">
                <h3>SIGN IN</h3>
-               <input type="text" placeholder="E-MAIL">
-               <input type="password" placeholder="PASSWORD">
+               <input type="text" name="email" placeholder="E-MAIL">
+               <input type="password" name="password" placeholder="PASSWORD">
                <div class="login_btn_area">
-                  <button type="button" class="btn submit">LOGIN</button>
+                  <button type="button" id="submit" class="btn submit" data-type="login">LOGIN</button>
                   <button type="button" class="btn signup">SIGN UP</button>
                </div>
             </form>
@@ -25,10 +25,4 @@
          </div>
       </div>
    </div>
-
-   <script>
-         document.querySelector(".btn.signup").addEventListener("click", function() {
-            location.href="/signup";
-         });
-   </script>
 @stop
