@@ -25,6 +25,14 @@ class AuthController extends Controller
     // 계정 생성
     public function login(Request $request)
     {
+        $request->validate([
+            'email' => ['required'],
+            'password' => ['required']
+        ], [
+            'email' => '이메일을 입력해주세요.',
+            'password' => '패스워드를 입력해주세요.'
+        ]);
+
         $user = $this->userRepositoryInterface->findUser($request);
 
         $msg = "아이디 또는 패스워드가 맞지 않습니다.\n다시 확인해 주세요.";

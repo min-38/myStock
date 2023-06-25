@@ -5,8 +5,14 @@
          <div class="contact">
             <form id="loginForm">
                <h3>SIGN IN</h3>
-               <input type="text" name="email" placeholder="E-MAIL">
-               <input type="password" name="password" placeholder="PASSWORD">
+               <div id="emailDiv" class="inputDiv">
+                  <input type="text" class="inputData" name="email" placeholder="E-MAIL">
+                  <span class="invalid-feedback" role="alert"></span>
+               </div>
+               <div id="passwordDiv" class="inputDiv">
+                  <input type="password" class="inputData" name="password" placeholder="PASSWORD">
+                  <span class="invalid-feedback" role="alert"></span>
+               </div>
                <div class="login_btn_area">
                   <button type="button" id="submit" class="btn submit" data-type="login">LOGIN</button>
                   <button type="button" class="btn signup">SIGN UP</button>

@@ -6,15 +6,15 @@
             <form id="signupForm">
                <h3>SIGN UP</h3>
                <div id="usernameDiv" class="inputDiv">
-                  <input type="text" class="signinData" name="username" placeholder="NAME / NICKNAME">
+                  <input type="text" class="inputData" name="username" placeholder="NAME / NICKNAME">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="ageDiv" class="inputDiv">
-                  <input type="number" class="signinData" name="age" min=19 placeholder="AGE">
+                  <input type="number" class="inputData" name="age" min=19 placeholder="AGE">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="countryDiv" class="inputDiv">
-                  <select class="signinData" name="country">
+                  <select class="inputData" name="country">
                      <option value="" selected disabled>COUNTRY</option>
                      <option value="Afghanistan">Afghanistan</option>
                      <option value="Åland Islands">Åland Islands</option>
@@ -264,19 +264,19 @@
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="emailDiv" class="inputDiv">
-                  <input type="text" class="signinData" name="email" placeholder="E-MAIL">
+                  <input type="text" class="inputData" name="email" placeholder="E-MAIL">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="phoneDiv" class="inputDiv">
-                  <input type="tel" class="signinData" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="PHONE">
+                  <input type="tel" class="inputData" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="PHONE">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="passwordDiv" class="inputDiv">
-                  <input type="password" class="signinData" name="password" placeholder="PASSWORD(8~16자의 이상의 영문, 숫자, 특수문자) ">
+                  <input type="password" class="inputData" name="password" placeholder="PASSWORD(8~16자의 이상의 영문, 숫자, 특수문자) ">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <div id="password_confirmationDiv" class="inputDiv">
-                  <input type="password" class="signinData" name="password_confirmation" placeholder="PASSWORD CONFIRM">
+                  <input type="password" class="inputData" name="password_confirmation" placeholder="PASSWORD CONFIRM">
                   <span class="invalid-feedback" role="alert"></span>
                </div>
                <input type="hidden" id="csrf_token" name="_token" value="{{ csrf_token() }}" />
