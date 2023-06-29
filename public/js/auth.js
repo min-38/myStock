@@ -23,44 +23,6 @@ window.onload = function(){
     });
 }
 
-function doLogin() {
-    const formData = new FormData(document.getElementById("loginForm"));
-
-    sendDataThroughAJAX("/login", formData);
-    // AJAX
-    const xhr = new XMLHttpRequest();
-
-    xhr.open('POST', '/login', true); // 요청을 보낼 방식, url, 비동기여부 설정
-    xhr.setRequestHeader("X-CSRF-TOKEN", document.querySelector('meta[name="csrf-token"]').content);
-    xhr.setRequestHeader('Accept', 'application/json'); 
-    xhr.responseType = 'json';
-    
-    xhr.send(formData);
-
-    //Callback
-    xhr.onload = () => {
-        if (xhr.status == 200) {
-            //success
-            if(xhr.response.success) {
-                // alert(xhr.response.msg);
-                window.location.href = xhr.response.redirectUrl;
-            } else {
-                alert(xhr.response.msg);
-            }
-        } else if (xhr.status == 422) {
-            setErrorMsg(xhr.response);
-        } else {
-            //failed
-            alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
-        }
-    }
-}
-
-function doSignup()
-{
-    
-}
-
 function sendDataThroughAJAX(target, data) {
 
     // 유효성 검사 오류 텍스트 초기화
@@ -68,7 +30,7 @@ function sendDataThroughAJAX(target, data) {
     allFeedback.forEach((ob)=>{
         ob.classList.remove("active");
     })
-    
+
     // AJAX
     const xhr = new XMLHttpRequest();
 

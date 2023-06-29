@@ -4,16 +4,18 @@
     @include('Includes.head')
 </head>
 <body>
-    <div class="container">
-        <header class="row">
-            @include('Includes.header')
-        </header>
-        <div id="main" class="row">
+    <div class="container-fluid position-relative d-flex p-0">
+        @include('Includes.sidebar')
+        @include('Includes.header')
+        <div class="content">
+            <!-- Content Start -->
             @yield('content')
-        </div>
-        <footer class="row">
+            <!-- Content End -->
             @include('Includes.footer')
-        </footer>
+        </div>
+        <!-- <footer class="row">
+            
+        </footer> -->
     </div>
 </body>
 </html>

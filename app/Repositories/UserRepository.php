@@ -41,4 +41,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
         
         return $this->create($userData);
     }
+
+    public function deleteUser(String $user) {
+
+    }
+
+    public function signoutUSer(String $user) {
+
+    }
 }
