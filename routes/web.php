@@ -41,4 +41,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
     Route::get('/dashboard', function () {
         return view('Pages/dashboard');
     })->name('dashboard');
+    
+    Route::group(['middleware' => 'auth'], function() {
+        // Route::get('/dashboard', function () {
+        //     return view('Pages/dashboard');
+        // })->name('dashboard');
+    });
 });

@@ -1,9 +1,25 @@
 /********** Template CSS **********/
 :root {
-    --primary: #EB1616;
-    --secondary: #191C24;
+    --border: #72b01d;
+    --content: #e9ecef;
+    --primary: #ff595e;
+    --secondary: #FFFFFF;
     --light: #6C7293;
-    --dark: #000000;
+    --dark: #FFFFFF;
+}
+
+body {
+    background: var(--dark);
+}
+
+a {
+    color: var(--light)!important;
+    text-decoration: none;
+}
+
+.sidebar-toggler,
+.navbar-title {
+    color: var(--border)!important;
 }
 
 .back-to-top {
@@ -14,6 +30,13 @@
     z-index: 99;
 }
 
+.navbar-dark {
+    background: var(--secondary);
+}
+
+.content-bg {
+    background: var(--content);
+}
 
 /*** Spinner ***/
 #spinner {
@@ -68,23 +91,25 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 250px;
+    width: 210px;
     height: 100vh;
     overflow-y: auto;
     background: var(--secondary);
     transition: 0.5s;
     z-index: 999;
+    border-right: 2px solid #72b01d;
 }
 
 .headbar {
     width: 100%;
-    padding-left: 250px;
+    padding-left: 210px;
     position: absolute;
     transition: 0.5s;
+    border-bottom: 2px solid #72b01d;
 }
 
 .content {
-    margin-left: 250px;
+    margin-left: 210px;
     margin-top: 50px;
     min-height: 150vh;
     background: var(--dark);
@@ -101,7 +126,7 @@
     }
 
     .content {
-        width: calc(100% - 250px);
+        width: calc(100% - 210px);
     }
 
     .content.open {
@@ -294,4 +319,27 @@
 .testimonial-carousel .owl-dot.active {
     background: var(--dark);
     border-color: var(--primary);
+}
+
+.xi-money {
+    color: #000000
+}
+
+.xi-trending-up {
+    color: var(--border);
+}
+.xi-trending-down {
+    color: #ff595e;
+}
+
+.xi-wallet {
+    color: brown;
+}
+
+.main-chart-area {
+    height: 60vh;
+}
+
+.favourite-stock {
+    height: 100%;
 }
