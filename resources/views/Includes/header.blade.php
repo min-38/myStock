@@ -16,7 +16,7 @@
                 <div class="dropdown-menu dropdown-menu-end border-0 rounded-0 rounded-bottom m-0">
                     <a href="#" class="dropdown-item">내 프로필</a>
                     <!-- <a href="#" class="dropdown-item">Settings</a> -->
-                    <a href="#" class="dropdown-item">로그아웃</a>
+                    <a href="/logout" class="dropdown-item">로그아웃</a>
                 </div>
             </div>
         </div>

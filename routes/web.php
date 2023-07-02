@@ -37,20 +37,17 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         })->name('auth.login');
         Route::post('/login', 'AuthController@login');
     });
-
-    // TODO: 나중에 auth 아래로 들어가야 함
-    Route::get('/dashboard', function () {
-        return view('Pages/dashboard');
-    })->name('dashboard');
-
-    Route::get('/stock', function () {
-        return view('Pages.stocks');
-    })->name('dashboard');
-    Route::post('/stock', 'StockController@getStock');
     
     Route::group(['middleware' => 'auth'], function() {
-        // Route::get('/dashboard', function () {
-        //     return view('Pages/dashboard');
-        // })->name('dashboard');
+        Route::get('/logout', 'AuthController@logout');
+        
+        Route::get('/dashboard', function () {
+            return view('Pages/dashboard');
+        })->name('dashboard');
+    
+        Route::get('/stock', function () {
+            return view('Pages.stocks');
+        })->name('stock');
+        Route::post('/stock', 'StockController@getStock');
     });
 });

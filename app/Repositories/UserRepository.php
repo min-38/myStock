@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Repositories\BaseRepository;
@@ -19,11 +20,9 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
 
     public function findUser(Request $request)
     {
-        $existUser = User::where('email', $request->input('email'))->first("*");
-        if($existUser) {
-            if(Hash::check($request->input('password'), $existUser->password)) {
-                return $existUser;
-            }
+        if(Auth::attempt($request->only('email', 'password'))) {
+            $request->session()->regenerate();
+            return true;
         }
         return false;
     }

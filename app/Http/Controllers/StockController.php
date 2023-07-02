@@ -11,7 +11,7 @@ class StockController extends Controller
 {
     private StockRepositoryInterface $stockRepo;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::LOGIN;
 
     public function __construct(StockRepositoryInterface $stockRepo)
     {
@@ -20,8 +20,8 @@ class StockController extends Controller
     }
 
     // 주식 검색
-    public function getStock()
+    public function getStock(StockRequest $request)
     {
-        $stock = $this->stockRepo->getStock();
+        $this->stockRepo->getStock($request);
     }
 }

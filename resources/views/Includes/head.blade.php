@@ -46,16 +46,9 @@
 
 <!-- Template Javascript -->
 <script src="js/main.js"></script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
-<!-- Required Core Stylesheet -->
-<link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.core.min.css">
-
-<!-- Optional Theme Stylesheet -->
-<link rel="stylesheet" href="node_modules/@glidejs/glide/dist/css/glide.theme.min.css">
+<script src="js/Component.js"></script>
+<script src="js/Base.js"></script>
+<script src="js/StockInfo.js"></script>
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.canvasjs.com/canvasjs.stock.min.js"></script>
-
-<script src="js/test.js"></script>

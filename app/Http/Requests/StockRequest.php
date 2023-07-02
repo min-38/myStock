@@ -23,8 +23,8 @@ class StockRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'name' => 'required', // 주식명
-            // 'date' => Rule::in(['', '1y']), // 주식 차트 그래프 기간
+            'name' => 'required', // 주식명
+            'date' => Rule::in(['', '1y']), // 주식 차트 그래프 기간
         ];
     }
 }
