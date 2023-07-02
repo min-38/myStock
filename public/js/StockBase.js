@@ -1,11 +1,11 @@
-class StockInfo extends Base {
+class StockBase extends Base {
     constructor() {
         super();
         this.stock = "KOSPI";
     }
 
     // 주식 검색
-    getStockData(stock = "") {
+    async getStockData(stock = "") {
         if(stock && this.stock !== stock)
             this.stock = stock;
 
@@ -13,23 +13,22 @@ class StockInfo extends Base {
         formData.append('name', this.stock);
         
         //Callback
-        this.sendXhr("/stock", formData).onload = () => {
-            if (this.xhr.status == 200) {
-                if(this.xhr.response) {
-                    this.drawChart(this.xhr.response);
+        this.sendXhr("/stock", formData, true).onload = () => {
+            if(this.xhr.readyState === this.xhr.DONE){  
+                if (this.xhr.status == 200) {
+                    if(this.xhr.response) {
+                        this.drawChart(this.xhr.response);
+                    }
+                } else if (this.xhr.status == 422) {
+                    setErrorMsg(this.xhr.response);
+                } else {
+                    //failed
+                    alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
                 }
-            } else if (this.xhr.status == 422) {
-                setErrorMsg(this.xhr.response);
-            } else {
-                //failed
-                alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
+
+                this.getStockData(this.stock);
             }
         }
-
-        const instance = this;
-        setInterval(function () {
-            instance.getStockData(instance.stock)}, 100000
-        );
     }
 
     drawChart(object) {
@@ -102,5 +101,5 @@ class StockInfo extends Base {
     }
 }
 
-const stocknfo = new StockInfo();
-stocknfo.getStockData();
+const stockBase = new StockBase();
+stockBase.getStockData();

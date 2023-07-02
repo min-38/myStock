@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 // Illuminate
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -14,7 +16,7 @@ class AuthController extends Controller
 {
     private UserRepositoryInterface $userRepositoryInterface;
 
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::LOGIN;
 
     public function __construct(UserRepositoryInterface $userRepositoryInterface)
     {
@@ -44,10 +46,9 @@ class AuthController extends Controller
             $redirectUrl = "/dashboard";
         }
 
-        // 로그인 실패 시
         return response()->json(array(
-            'success' => $user ? true : false,
-            'msg'   => $msg,
+            'success'       => $user ? true : false,
+            'msg'           => $msg,
             'redirectUrl'   => $redirectUrl,
         ));
     }
@@ -64,5 +65,13 @@ class AuthController extends Controller
                 'redirectUrl'   => "/login",
             ));
         }
+    }
+
+    public function logout() {
+        Session::flush();
+        
+        Auth::logout();
+
+        return redirect('login');
     }
 }

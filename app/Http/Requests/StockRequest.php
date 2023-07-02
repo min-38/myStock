@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class StockRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class StockRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class StockRequest extends FormRequest
     {
         return [
             'name' => 'required', // 주식명
-            'date' => Rule::in(['', '1y']), // 주식 차트 그래프 기간
+            // 'date' => Rule::in(['', '1y']), // 주식 차트 그래프 기간
         ];
     }
 }

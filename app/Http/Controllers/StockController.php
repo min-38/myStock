@@ -11,11 +11,9 @@ class StockController extends Controller
 {
     private StockRepositoryInterface $stockRepo;
 
-    protected $redirectTo = RouteServiceProvider::LOGIN;
-
     public function __construct(StockRepositoryInterface $stockRepo)
     {
-        $this->middleware('guest')->except('logout');
+        $this->middleware('auth');
         $this->stockRepo = $stockRepo;
     }
 
