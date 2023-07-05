@@ -3,11 +3,7 @@ class Component {
         this.target = "";
     }
 
-    setTarget(target) {
-        this.target = document.getElementById(target);
-    }
-
-    render(view) {
-        this.target.innerHTML = view;
+    render(view, target) {
+        document.getElementById(target).innerHTML = view;
     }
 }

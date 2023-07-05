@@ -25,7 +25,7 @@ class StockRequest extends FormRequest
     {
         return [
             'name' => 'required', // 주식명
-            // 'date' => Rule::in(['', '1y']), // 주식 차트 그래프 기간
+            'startDate' => ''
         ];
     }
 }

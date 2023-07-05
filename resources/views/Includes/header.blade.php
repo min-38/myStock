@@ -10,7 +10,7 @@
         <div class="navbar-nav align-items-center ms-auto">
             <div class="nav-item dropdown">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-                    <img class="rounded-circle me-lg-2" src="img/default-user.png" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle me-lg-2" src="/img/default-user.png" alt="" style="width: 40px; height: 40px;">
                     <span class="user-id-text d-none d-lg-inline-flex">아무개</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end border-0 rounded-0 rounded-bottom m-0">

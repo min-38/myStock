@@ -1,105 +1,119 @@
-class StockBase extends Base {
+class StockBase extends Component {
     constructor() {
         super();
-        this.stock = "KOSPI";
+        this.stockChart = "";
+        this.stockCode = "^KS11";
+        this.stockName = "KOSPI";
+        this.stockName_KR = "코스피";
+
+        this.loadDate = "";
+
+        this.json = {};
+        this.stockData = anychart.data.table(0);
     }
 
-    // 주식 검색
-    async getStockData(stock = "") {
-        if(stock && this.stock !== stock)
-            this.stock = stock;
+    setCandleChart(selector) {
+        this.stockChart = anychart.stock();
 
-        const formData = new FormData();
-        formData.append('name', this.stock);
-        
-        //Callback
-        this.sendXhr("/stock", formData, true).onload = () => {
-            if(this.xhr.readyState === this.xhr.DONE){  
-                if (this.xhr.status == 200) {
-                    if(this.xhr.response) {
-                        this.drawChart(this.xhr.response);
-                    }
-                } else if (this.xhr.status == 422) {
-                    setErrorMsg(this.xhr.response);
-                } else {
-                    //failed
-                    alert("알 수 없는 오류가 발생했습니다.\n다시 한번 시도해주세요.");
-                }
-
-                this.getStockData(this.stock);
-            }
-        }
-    }
-
-    drawChart(object) {
-        if(Object.keys(object).length <= 0) {
-            return;
-        }
-        const dps1 = [], dps2= [];
-
-        for (const data in object) {
-            dps1.push({x: new Date(parseInt(data)), y: [Number(object[data]['Open']), Number(object[data]['High']), Number(object[data]['Low']), Number(object[data]['Close'])]});
-            dps2.push({x: new Date(parseInt(data)), y: Number(object[data]['Close'])});
-        }
-        
-        const instance = this;
-        let stockChart = new CanvasJS.StockChart("chartContainer", {
-            theme: "light2",
-            title:{
-                text:instance.stock,
-            },
-            subtitles: [{
-                // text: "Exponential Moving Average"
-            }],
-            charts: [{
-                axisY: {
-                    prefix: "$"
-                },
-                toolTip: {
-                shared: true
-                },
-                legend: {
-                    cursor: "pointer",
-                    verticalAlign: "top",
-                    itemclick: function (e) {
-                        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                        e.dataSeries.visible = false;
-                        } else {
-                        e.dataSeries.visible = true;
-                        }
-                        e.chart.render();
-                    }
-                },
-                data: [{
-                    type: "candlestick",
-                    name: "Stock Price",
-                    showInLegend: true,
-                    yValueFormatString: "$#,###.##",
-                    xValueType: "dateTime",
-                    dataPoints : dps1
-                }],
-            }],
-            navigator: {
-                data: [{
-                    dataPoints: dps2
-                }],
-            }
+        // map loaded data for the ohlc series
+        var mapping = this.stockData.mapAs({
+            open: 1,
+            high: 2,
+            low: 3,
+            close: 4
         });
 
-        stockChart.render();
-        var ema = this.calculateEMA(dps1, 7);
-        stockChart.charts[0].addTo("data", {type: "line", name: "EMA", showInLegend: true, yValueFormatString: "$#,###.##", dataPoints: ema});
+        const scrollerMapping = this.stockData.mapAs({'value': 5});
+
+        this.stockChart.data = this.stockData;
+
+        // create first plot on the chart
+        const plot = this.stockChart.plot(0);
+        // set grid settings
+        plot.yGrid(true).xGrid(true).yMinorGrid(true).xMinorGrid(true);
+
+        // create EMA indicators with period 50
+        plot
+            .ema(this.stockData.mapAs({ value: 4 }))
+            .series()
+            .stroke('1.5 #FF6600');
+
+        var series = plot.candlestick(mapping);
+        series.name(this.setChartTitle());
+        series.legendItem().iconType('rising-falling');
+
+        // create scroller series with mapped data
+        this.stockChart.scroller().candlestick(mapping);
+
+        // set chart selected date/time range
+        // this.stockChart.selectRange('2022-01-01', '2023-05-20');
+
+        // set container id for the chart
+        this.stockChart.container(selector);
+        // initiate chart drawing
+        this.stockChart.draw();
+
+        // create range picker
+        var rangePicker = anychart.ui.rangePicker();
+        // // init range picker
+        rangePicker.render(this.stockChart);
+
+        // // create range selector
+        var rangeSelector = anychart.ui.rangeSelector();
+        // // init range selector
+        rangeSelector.render(this.stockChart);
     }
 
-    calculateEMA(dps, count) {
-        var k = 2 /(count + 1);
-        var emaDps = [{x: dps[0].x, y: dps[0].y.length ? dps[0].y[3] : dps[0].y}];
-        for (var i = 1; i < dps.length; i++) {
-            emaDps.push({x: dps[i].x, y: (dps[i].y.length ? dps[i].y[3] : dps[i].y) * k + emaDps[i - 1].y * (1 - k)});
+    setChartData(flag) {
+        if(flag) {
+            this.stockData.remove();
         }
-        return emaDps;
+        
+        const result = [];
+        for (const data in this.json) {
+            // const date = new Date(parseInt(data));
+            const date = parseInt(data);
+            result.push([
+                date,
+                Number(this.json[data]['Open']),
+                Number(this.json[data]['High']),
+                Number(this.json[data]['Low']),
+                Number(this.json[data]['Close']),
+                Number(this.json[data]['Volume'])
+            ])
+
+            if(!this.loadDate) {
+                this.loadDate = date;
+            } else {
+                if(this.loadDate < date) {
+                    this.loadDate = date;
+                }
+            }
+        }
+        this.stockData.addData(result);
+        console.log(this.stockData);
+    }
+
+    setChartUpdate() {
+        // this.stockChart.title.set("text", this.setChartTitle());
+    }
+
+    setChartTitle() {
+        // const result = `${this.stockName}(${this.stockName_KR}) ${this.stockCode}`;
+        const result = `${this.stockName_KR}(${this.stockName})`;
+        return result;
+    }
+
+    async getData(url, formData) {
+        await base.sendXhr(url, formData, true).then((response)=>{
+            this.json = response;
+            //	필요한 작업은 여기에
+        }).catch((errorMsg)=>{
+            alert(errorMsg);
+        });
+    }
+
+    skipWeekend(dps) {
+        return dps.x.getDay() !== 6 && dps.x.getDay() !== 0;
     }
 }
-
-const stockBase = new StockBase();
-stockBase.getStockData();

@@ -17,8 +17,13 @@ class StockController extends Controller
         $this->stockRepo = $stockRepo;
     }
 
+    // 주식 목록 가져오기
+    public function getStockList() {
+        $this->stockRepo->getStockList();
+    }
+
     // 주식 검색
-    public function getStock(StockRequest $request)
+    public function getChartData(StockRequest $request)
     {
         $this->stockRepo->getStock($request);
     }

@@ -44,10 +44,12 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/dashboard', function () {
             return view('Pages/dashboard');
         })->name('dashboard');
-    
-        Route::get('/stock', function () {
+
+        // Related Stock 
+        Route::get('/stock/chart', function () {
             return view('Pages.stocks');
         })->name('stock');
-        Route::post('/stock', 'StockController@getStock');
+        Route::post('/stock/getList', 'StockController@getStockList');
+        Route::post('/stock/getChartData', 'StockController@getChartData');
     });
 });

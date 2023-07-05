@@ -9,7 +9,7 @@
         </a>
         <div class="navbar-nav w-100">
             <a href="/dashboard" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>대시보드</a>
-            <a href="/stock" class="nav-item nav-link"><i class="fa fa-chart-line me-2"></i>주식</a>
+            <a href="/stock/chart" class="nav-item nav-link"><i class="fa fa-chart-line me-2"></i>주식</a>
             <a href="/statstics" class="nav-item nav-link"><i class="fa fa-chart-pie me-2"></i>통계</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-comments me-2"></i>게시판</a>
